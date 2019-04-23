@@ -28,12 +28,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date 2017/5/21 12:06
  */
 @SpringBootApplication(exclude = {WebAutoConfiguration.class})
-public class GunsApplication {
+public class SheepApplication {
 
-    private final static Logger logger = LoggerFactory.getLogger(GunsApplication.class);
+    private final static Logger logger = LoggerFactory.getLogger(SheepApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(GunsApplication.class, args);
-        logger.info(GunsApplication.class.getSimpleName() + " is success!");
+        SpringApplication.run(SheepApplication.class, args);
+        logger.info(SheepApplication.class.getSimpleName() + " is success!");
     }
 }

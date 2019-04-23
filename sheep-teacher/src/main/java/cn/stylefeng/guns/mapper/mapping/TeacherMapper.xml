@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.mapper.TeacherMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.entity.Teacher">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="career" property="career"/>
+        <result column="mobile" property="mobile"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <select id="list" resultType="map">
+        select * from teacher
+        where 1=1
+        <if test="name != null and name != ''">
+            and upper(name) like upper(CONCAT('%',#{name},'%'))
+        </if>
+        <if test="teacherId != null and teacherId != ''">
+            and id = #{teacherId}
+        </if>
+        and status = 0
+    </select>
+
+</mapper>

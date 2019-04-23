@@ -1,0 +1,33 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/teacher/teacher_add.js"]}){
+<form id="teacherForm" lay-filter="teacherForm" class="layui-form model-form">
+    <input name="deptId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" placeholder="请输入姓名" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系电话<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="mobile" name="mobile" placeholder="请输入联系电话" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">从事行业<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="career" name="career" placeholder="请输入从事行业" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <input name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

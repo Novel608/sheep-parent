@@ -20,6 +20,8 @@ public class BusiClassDto implements Serializable {
 
     private String headMaster;
 
+    private String headMasterName;
+
     private String remark;
 
     private Date createTime;

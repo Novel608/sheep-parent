@@ -22,6 +22,9 @@ public class BusiClass implements Serializable {
 
     private String headMaster;
 
+    @TableField(exist = false)
+    private String headMasterName;
+
     private String remark;
 
     private Date createTime;
@@ -29,6 +32,14 @@ public class BusiClass implements Serializable {
     private Date updateTime;
 
     private Integer status;
+
+    public String getHeadMasterName() {
+        return headMasterName;
+    }
+
+    public void setHeadMasterName(String headMasterName) {
+        this.headMasterName = headMasterName;
+    }
 
     public Integer getId() {
         return id;

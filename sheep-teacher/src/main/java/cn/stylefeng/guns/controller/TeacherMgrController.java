@@ -10,6 +10,7 @@ import cn.stylefeng.roses.core.base.controller.BaseController;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,11 @@ public class TeacherMgrController extends BaseController {
 
     @Autowired
     private TeacherService teacherService;
+
+    @RequestMapping("/teacherDlg")
+    public String teacherDlg(){
+        return PREFIX + "teacher_dlg.html";
+    }
 
     @RequestMapping("/index")
     public String index(HttpServletRequest request, HttpServletResponse response) throws IOException {

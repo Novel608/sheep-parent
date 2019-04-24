@@ -1,0 +1,25 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/teacher/teacher_dlg.js"]}){
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="name" class="layui-input" type="text" placeholder="姓名"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="teacherTable" lay-filter="teacherTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@}

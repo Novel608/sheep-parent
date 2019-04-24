@@ -14,17 +14,16 @@
     </resultMap>
 
     <select id="list" resultType="map">
-        select * from busi_class
-        where 1=1
+        select t1.*,t2.name as headMasterName from busi_class t1, busi_teacher t2
+        where t1.head_master = t2.id and t1.status = 1
         <if test="busiClass != null">
             <if test="busiClass.name != null and busiClass.name != ''">
-                and upper(name) like upper(CONCAT('%',#{busiClass.name},'%'))
+                and upper(t1.name) like upper(CONCAT('%',#{busiClass.name},'%'))
             </if>
             <if test="busiClass.shortName != null and busiClass.shortName != ''">
-                and short_name  like CONCAT('%',#{busiClass.shortName},'%')
+                and t1.short_name  like CONCAT('%',#{busiClass.shortName},'%')
             </if>
         </if>
-        and status = 1
     </select>
 
 </mapper>

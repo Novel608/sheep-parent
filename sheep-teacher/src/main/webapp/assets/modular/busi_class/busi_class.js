@@ -19,7 +19,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
             {field: 'id', hide: true, sort: true, title: 'id'},
             {field: 'name', sort: true, title: '班级名称'},
             {field: 'short_name', sort: true, title: '班级简称'},
-            {field: 'head_master', sort: true, title: '班主任'},
+            {field: 'headMasterName', sort: true, title: '班主任'},
             {field: 'remark', sort: true, title: '备注'},
             {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200}
         ]]
@@ -32,7 +32,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
-            title: '添加教师',
+            title: '添加班级',
             content: Feng.ctxPath + '/busiClass/add',
             end: function () {
                 admin.getTempData('formOk') && table.reload(BusiClass.tableId);
@@ -49,7 +49,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
-            title: '教师信息编辑',
+            title: '班级信息编辑',
             content: Feng.ctxPath + '/busiClass/edit?id=' + data.id,
             end: function () {
                 admin.getTempData('formOk') && table.reload(BusiClass.tableId);
@@ -73,7 +73,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
             ajax.set("classId", data.id);
             ajax.start();
         };
-        Feng.confirm("是否删除用户" + data.name + "?", operation);
+        Feng.confirm("是否删除班级" + data.name + "?", operation);
     };
 
     /**

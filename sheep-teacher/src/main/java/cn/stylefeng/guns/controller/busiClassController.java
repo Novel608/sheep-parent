@@ -3,8 +3,10 @@ package cn.stylefeng.guns.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
 import cn.stylefeng.guns.entity.BusiClass;
+import cn.stylefeng.guns.entity.Teacher;
 import cn.stylefeng.guns.model.BusiClassDto;
 import cn.stylefeng.guns.services.interfaces.BusiClassService;
+import cn.stylefeng.guns.services.interfaces.TeacherService;
 import cn.stylefeng.guns.wrapper.BusiClassWrapper;
 import cn.stylefeng.guns.wrapper.TeacherWrapper;
 import cn.stylefeng.roses.core.base.controller.BaseController;
@@ -30,6 +32,8 @@ public class busiClassController extends BaseController {
 
     @Resource
     private BusiClassService busiClassService;
+    @Autowired
+    private TeacherService teacherService;
 
     @RequestMapping("/add")
     public String addClassPage(){
@@ -64,6 +68,8 @@ public class busiClassController extends BaseController {
         BusiClassDto busiClassDto = new BusiClassDto();
         if (busiClass != null) {
             BeanUtil.copyProperties(busiClass,busiClassDto);
+            Teacher teacher = teacherService.getById(busiClass.getHeadMaster());
+            busiClassDto.setHeadMasterName(teacher.getName());
         }
         return busiClassDto;
     }

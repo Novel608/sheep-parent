@@ -1,3 +1,10 @@
+var TeacherInfoDlg = {
+    data: {
+        id: "",
+        name: ""
+    }
+};
+
 layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
@@ -6,6 +13,23 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var layer = layui.layer;
     // 让当前iframe弹层高度适应
     admin.iframeAuto();
+
+    $("#headMasterName").click(function(){
+        top.layui.admin.open({
+            type: 2,
+            title: '班主任',
+            area: ['700px', '600px'],
+            content: Feng.ctxPath + '/teacher/teacherDlg',
+            btn: ['确认'],
+            yes: function(index, layero){
+                var iframeWin = top[layero.find('iframe')[0]['name']];
+                var res = iframeWin.TeacherInfo;
+                $("#headMaster").val(res.id);
+                $("#headMasterName").val(res.name);
+                parent.layer.close(index);
+            }
+        });
+    });
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {

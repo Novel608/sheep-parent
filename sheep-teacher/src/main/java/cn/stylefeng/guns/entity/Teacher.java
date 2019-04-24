@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author zhangjq
  * @date 2019/4/22 23:17
  */
-@TableName("teacher")
+@TableName("busi_teacher")
 public class Teacher implements Serializable {
     private static final long serialVersionUID = 1L;
 

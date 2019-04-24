@@ -1,0 +1,32 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/busi_class/busi_class_add.js"]}){
+<form id="teacherForm" lay-filter="teacherForm" class="layui-form model-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">班级名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" placeholder="请输入班级名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">班级简称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="shortName" placeholder="请输入班级简称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">班主任<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="headMaster" name="headMaster" placeholder="请选择班主任" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <input name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

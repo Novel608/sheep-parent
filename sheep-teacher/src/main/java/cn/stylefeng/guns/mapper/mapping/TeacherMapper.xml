@@ -12,7 +12,7 @@
     </resultMap>
 
     <select id="list" resultType="map">
-        select * from teacher
+        select * from busi_teacher
         where 1=1
         <if test="name != null and name != ''">
             and upper(name) like upper(CONCAT('%',#{name},'%'))
@@ -20,7 +20,7 @@
         <if test="teacherId != null and teacherId != ''">
             and id = #{teacherId}
         </if>
-        and status = 0
+        and status = 1
     </select>
 
 </mapper>

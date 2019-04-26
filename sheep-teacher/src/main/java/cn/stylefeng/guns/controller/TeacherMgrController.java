@@ -71,7 +71,7 @@ public class TeacherMgrController extends BaseController {
     @RequestMapping("/addTeacher")
     @ResponseBody
     public Object addTeacher(Teacher teacher){
-        if (teacher.getStatus() == 0) {
+        if (teacher.getStatus() == null || teacher.getStatus() == 0) {
             teacher.setStatus(1);
         }
         this.teacherService.save(teacher);
@@ -113,7 +113,7 @@ public class TeacherMgrController extends BaseController {
     public Object deleteTeacher(String teacherId){
         Teacher teacher = this.teacherService.getById(teacherId);
         if (teacher != null) {
-            teacher.setStatus(1);
+            teacher.setStatus(0);
             this.teacherService.update(teacher);
         }
         return SUCCESS_TIP;

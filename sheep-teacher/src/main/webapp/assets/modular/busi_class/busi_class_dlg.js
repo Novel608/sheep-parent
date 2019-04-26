@@ -1,3 +1,7 @@
+var ClassInfo = {
+    classId:'',
+    className: ''
+}
 layui.use(['table', 'admin', 'ax', 'ztree'], function () {
     var $ = layui.$;
     var table = layui.table;
@@ -14,13 +18,12 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
 
     BusiClass.initColumn = function(){
         return [[
-            {type: 'checkbox'},
+            {type: 'radio'},
             {field: 'id', hide: true, sort: true, title: 'id'},
             {field: 'name', sort: true, title: '班级名称'},
             {field: 'short_name', sort: true, title: '班级简称'},
             {field: 'headMasterName', sort: true, title: '班主任'},
-            {field: 'remark', sort: true, title: '备注'},
-            {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200}
+            {field: 'remark', sort: true, title: '备注'}
         ]]
     };
 
@@ -108,8 +111,14 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
         cols: BusiClass.initColumn()
     });
 
+    table.on('radio(' + BusiClass.tableId + ')',function (obj) {
+        console.log(obj.data)
+        ClassInfo.classId = obj.data.id;
+        ClassInfo.className = obj.data.name;
+    });
+
     $('#btnAdd').click(function(){
-       BusiClass.openAddDept()
+        BusiClass.openAddDept()
     });
 
     $('#btnSearch').click(function () {

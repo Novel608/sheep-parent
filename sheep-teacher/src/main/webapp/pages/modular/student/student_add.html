@@ -1,0 +1,81 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/student/student_add.js"]}){
+<form id="studentForm" lay-filter="studentForm" class="layui-form model-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">学生照片<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <div class="layui-inline">
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="studentPic" src="${ctxPath}/assets/common/images/Student.png" width="80" height="80">
+                    <p id="demoText"></p>
+                    <input type="hidden" id="picUrl" name="picUrl">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button type="button" class="layui-btn" id="btnUploadPicture">上传图片</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">学生姓名<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input name="name" placeholder="请输入学生姓名" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">曾用名</label>
+            <div class="layui-input-block">
+                <input name="beforeName" placeholder="请输入曾用名" type="text" class="layui-input" autocomplete="off"/>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">年龄<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input id="age" name="age" placeholder="请输入年龄" type="number" class="layui-input" lay-verify="required" required autocomplete="off"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">班级<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input type="hidden" name="classId" id="classId"/>
+                <input id="className" name="className" placeholder="请点击选择班级" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="address" name="address" placeholder="请输入地址信息" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <input name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系信息</label>
+        <div class="layui-input-block">
+            <span class="layui-btn layui-btn-sm" id="addContact">添加联系人信息</span>
+            <table class="layui-table" id="studentContactTable" lay-filter="studentContactTable"></table>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+
+<script type="text/html" id="contactTableBar">
+    @if(shiro.hasPermission("/student/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+    @if(shiro.hasPermission("/student/delete")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+</script>
+@}

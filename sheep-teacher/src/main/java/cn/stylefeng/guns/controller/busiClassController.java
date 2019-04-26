@@ -35,6 +35,11 @@ public class busiClassController extends BaseController {
     @Autowired
     private TeacherService teacherService;
 
+    @RequestMapping("/classDlg")
+    public String classDlg(){
+        return PREFIX + "busi_class_dlg.html";
+    }
+
     @RequestMapping("/add")
     public String addClassPage(){
         return PREFIX + "busi_class_add.html";

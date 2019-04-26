@@ -21,4 +21,7 @@ public class TeacherDto implements Serializable {
     private String remark;
 
     private String mobile;
+
+    private Integer status;
+
 }

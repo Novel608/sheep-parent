@@ -71,6 +71,9 @@ public class TeacherMgrController extends BaseController {
     @RequestMapping("/addTeacher")
     @ResponseBody
     public Object addTeacher(Teacher teacher){
+        if (teacher.getStatus() == 0) {
+            teacher.setStatus(1);
+        }
         this.teacherService.save(teacher);
         return SUCCESS_TIP;
     }

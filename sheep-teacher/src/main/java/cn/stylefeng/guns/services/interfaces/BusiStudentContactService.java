@@ -13,7 +13,11 @@ import java.util.Map;
 public interface BusiStudentContactService {
     Page<Map<String, Object>> list(Long studentId);
 
+    List<BusiStudentContact> selectListBean(Long studentId);
+
     boolean saveBatch(List<BusiStudentContact> studentContactList, int size);
 
     void saveUpdateBatch(List<BusiStudentContact> contactList, Long studentId);
+
+    void deleteByStudentId(Long studentIdNum);
 }

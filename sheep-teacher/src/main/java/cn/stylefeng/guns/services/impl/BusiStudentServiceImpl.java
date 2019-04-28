@@ -34,6 +34,11 @@ public class BusiStudentServiceImpl extends ServiceImpl<BusiStudentMapper, BusiS
         return studentMapper.selectById(studentIdNum);
     }
 
+    @Override
+    public void delete(Long studentIdNum) {
+        studentMapper.deleteById(studentIdNum);
+    }
+
     @Resource
     private BusiStudentMapper studentMapper;
 }

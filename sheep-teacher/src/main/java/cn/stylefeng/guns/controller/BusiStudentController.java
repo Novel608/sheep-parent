@@ -1,5 +1,6 @@
 package cn.stylefeng.guns.controller;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
 import cn.stylefeng.guns.entity.BusiClass;
 import cn.stylefeng.guns.entity.BusiStudent;
@@ -10,6 +11,7 @@ import cn.stylefeng.guns.services.interfaces.BusiStudentContactService;
 import cn.stylefeng.guns.services.interfaces.BusiStudentService;
 import cn.stylefeng.guns.wrapper.BusiClassWrapper;
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import cn.stylefeng.roses.core.reqres.response.ErrorResponseData;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,11 +39,31 @@ public class BusiStudentController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(BusiStudentController.class);
 
+    @RequestMapping("/deleteStudent")
+    @ResponseBody
+    public Object deleteStudent(String studentId){
+        BusiStudent student = studentService.getById(studentId);
+        if (student == null) {
+            return new ErrorResponseData("学生信息不存在");
+        }
+        Long studentIdNum = Long.valueOf(studentId);
+        contactService.deleteByStudentId(studentIdNum);
+        studentService.delete(studentIdNum);
+        return SUCCESS_TIP;
+    }
 
+    /**
+     * 根据学生ID获取学生信息
+     * @param studentId 学生ID
+     * @return
+     */
     @RequestMapping("/getStudentInfo")
     @ResponseBody
     public Object getStudentInfo(String studentId){
         BusiStudent student = studentService.getById(studentId);
+        if (student == null) {
+            return new ErrorResponseData("学生信息不存在");
+        }
         BusiStudentDto studentDto = new BusiStudentDto();
         BeanUtils.copyProperties(student,studentDto);
         BusiClass classInfo = classService.getById("" + studentDto.getClassId());
@@ -48,10 +71,19 @@ public class BusiStudentController extends BaseController {
         return studentDto;
     }
 
+    /**
+     * 修订学生信息
+     * @param studentStr 学生信息字符串
+     * @param contactListStr 学生联系信息字符串内容
+     * @return
+     */
     @RequestMapping("/editStudent")
     @ResponseBody
     public Object editStudent(String studentStr, String contactListStr){
         BusiStudent busiStudent = JSONObject.parseObject(studentStr, BusiStudent.class);
+        if (busiStudent == null) {
+            return new ErrorResponseData("学生信息不存在");
+        }
         studentService.update(busiStudent);
         List<BusiStudentContact> contactList = JSONArray.parseArray(contactListStr,BusiStudentContact.class);
         contactService.saveUpdateBatch(contactList, busiStudent.getId());

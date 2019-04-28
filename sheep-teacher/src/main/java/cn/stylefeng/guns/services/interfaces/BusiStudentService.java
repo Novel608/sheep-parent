@@ -17,4 +17,6 @@ public interface BusiStudentService {
     void update(BusiStudent busiStudent);
 
     BusiStudent getById(String studentId);
+
+    void delete(Long studentIdNum);
 }

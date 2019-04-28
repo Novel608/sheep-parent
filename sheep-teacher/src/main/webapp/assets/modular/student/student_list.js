@@ -18,6 +18,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
             {field: 'id', hide: true, sort: true, title: 'id'},
             {field: 'name', sort: true, title: '学生名称'},
             {field: 'before_name', sort: true, title: '曾用名'},
+            {field: 'age', sort: true, title: '年龄'},
             {field: 'className', sort: true, title: '班级名称'},
             {field: 'headMasterName', sort: true, title: '班主任'},
             {field: 'remark', sort: true, title: '备注'},
@@ -58,6 +59,24 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
             }
         });
     };
+    /**
+     * 删除学生数据信息
+     * @param data
+     */
+    Student.onDeleteStudent = function (data) {
+        console.log('1111111111111')
+        var operation = function () {
+            var ajax = new $ax(Feng.ctxPath + "/studentController/deleteStudent", function () {
+                table.reload(Student.tableId);
+                Feng.success("删除成功!");
+            }, function (data) {
+                Feng.error("删除失败!" + data.responseJSON.message + "!");
+            });
+            ajax.set("studentId", data.id);
+            ajax.start();
+        };
+        Feng.confirm("是否删除学生" + data.name + "?", operation);
+    };
 
     // 渲染表格
     var tableResult = table.render({
@@ -80,7 +99,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
         if (layEvent === 'edit') {
             Student.onEditStudent(data);
         } else if (layEvent === 'delete') {
-            Student.onDeleteTeacher(data);
+            Student.onDeleteStudent(data);
         }
     });
 

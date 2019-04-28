@@ -73,7 +73,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
             ajax.set("teacherId", data.id);
             ajax.start();
         };
-        Feng.confirm("是否删除用户" + data.name + "?", operation);
+        Feng.confirm("是否删除教师：" + data.name + "?", operation);
     };
 
     /**

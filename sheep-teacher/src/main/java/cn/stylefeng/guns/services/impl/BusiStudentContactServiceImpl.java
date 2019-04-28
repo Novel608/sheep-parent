@@ -30,6 +30,11 @@ public class BusiStudentContactServiceImpl extends ServiceImpl<BusiStudentContac
     }
 
     @Override
+    public List<BusiStudentContact> selectListBean(Long studentId) {
+        return contactMapper.selectList(studentId);
+    }
+
+    @Override
     public boolean saveBatch(List<BusiStudentContact> studentContactList, int size) {
         return super.saveBatch(studentContactList,size > 30? 30 : size);
     }
@@ -67,5 +72,18 @@ public class BusiStudentContactServiceImpl extends ServiceImpl<BusiStudentContac
             saveBatch(contactList);
         }
 
+    }
+
+
+    @Override
+    public void deleteByStudentId(Long studentIdNum) {
+        List<BusiStudentContact> studentContactList = selectListBean(studentIdNum);
+        if (!CollectionUtil.isEmpty(studentContactList)) {
+            List<Long> contactIdList = new ArrayList<>();
+            for (BusiStudentContact contact : studentContactList){
+                contactIdList.add(contact.getId());
+            }
+            contactMapper.deleteBatchIds(contactIdList);
+        }
     }
 }

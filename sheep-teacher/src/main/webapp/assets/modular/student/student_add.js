@@ -126,5 +126,17 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload','table'], function () {
         ajax.start();
     });
 
+    table.on("tool(" + StudentContact.tableId + ")", function(obj){
+        var layEvent = obj.event;
+        var data = obj.data;
+        if(layEvent === 'delete'){
+            var name = data.contact_name;
+            layer.confirm('确定要删除' + name + '的联系方式吗？', function(index){
+                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                layer.close(index);
+            });
+        }
+    });
+
 
 });

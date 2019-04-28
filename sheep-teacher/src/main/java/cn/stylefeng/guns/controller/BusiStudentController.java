@@ -105,6 +105,9 @@ public class BusiStudentController extends BaseController {
         logger.info("studentId:{}===={}", studentId, contactList);
         List<BusiStudentContact> studentContactList = JSONArray.parseArray(contactList, BusiStudentContact.class);
         for (BusiStudentContact temp : studentContactList){
+            if (temp == null) {
+                continue;
+            }
             temp.setStudentId(studentId);
         }
         contactService.saveBatch(studentContactList,studentContactList.size());

@@ -71,9 +71,6 @@
 </form>
 
 <script type="text/html" id="contactTableBar">
-    @if(shiro.hasPermission("/student/edit")){
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
-    @}
     @if(shiro.hasPermission("/student/delete")){
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
     @}

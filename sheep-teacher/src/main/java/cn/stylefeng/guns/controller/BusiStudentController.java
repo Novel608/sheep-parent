@@ -1,8 +1,11 @@
 package cn.stylefeng.guns.controller;
 
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
+import cn.stylefeng.guns.entity.BusiClass;
 import cn.stylefeng.guns.entity.BusiStudent;
 import cn.stylefeng.guns.entity.BusiStudentContact;
+import cn.stylefeng.guns.model.BusiStudentDto;
+import cn.stylefeng.guns.services.interfaces.BusiClassService;
 import cn.stylefeng.guns.services.interfaces.BusiStudentContactService;
 import cn.stylefeng.guns.services.interfaces.BusiStudentService;
 import cn.stylefeng.guns.wrapper.BusiClassWrapper;
@@ -12,6 +15,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +35,33 @@ import java.util.Map;
 public class BusiStudentController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(BusiStudentController.class);
+
+
+    @RequestMapping("/getStudentInfo")
+    @ResponseBody
+    public Object getStudentInfo(String studentId){
+        BusiStudent student = studentService.getById(studentId);
+        BusiStudentDto studentDto = new BusiStudentDto();
+        BeanUtils.copyProperties(student,studentDto);
+        BusiClass classInfo = classService.getById("" + studentDto.getClassId());
+        studentDto.setClassName(classInfo.getName());
+        return studentDto;
+    }
+
+    @RequestMapping("/editStudent")
+    @ResponseBody
+    public Object editStudent(String studentStr, String contactListStr){
+        BusiStudent busiStudent = JSONObject.parseObject(studentStr, BusiStudent.class);
+        studentService.update(busiStudent);
+        List<BusiStudentContact> contactList = JSONArray.parseArray(contactListStr,BusiStudentContact.class);
+        contactService.saveUpdateBatch(contactList, busiStudent.getId());
+        return SUCCESS_TIP;
+    }
+
+    @RequestMapping("/edit")
+    public String edit(){
+        return PREFIX + "student_edit.html";
+    }
 
 
     @RequestMapping("/addStudent")
@@ -59,7 +91,7 @@ public class BusiStudentController extends BaseController {
             Page<Map<String, Object>> result = new Page<>();
             return LayuiPageFactory.createPageInfo(result);
         }
-        Integer studentIdNum = Integer.valueOf(studentId);
+        Long studentIdNum = Long.valueOf(studentId);
         Page<Map<String, Object>> result = contactService.list(studentIdNum);
         Page<Map<String, Object>> wrap = new BusiClassWrapper(result).wrap();
         return LayuiPageFactory.createPageInfo(wrap);
@@ -94,4 +126,6 @@ public class BusiStudentController extends BaseController {
     private BusiStudentService studentService;
     @Resource
     private BusiStudentContactService contactService;
+    @Resource
+    private BusiClassService classService;
 }

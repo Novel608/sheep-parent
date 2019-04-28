@@ -17,6 +17,10 @@
         select * from busi_student_contact
             where status = 1 and student_id = #{studentId}
     </select>
+    <select id="selectList" resultType="cn.stylefeng.guns.entity.BusiStudentContact">
+         select * from busi_student_contact
+            where status = 1 and student_id = #{studentId}
+    </select>
 
 
 </mapper>

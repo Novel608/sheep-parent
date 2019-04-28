@@ -11,7 +11,9 @@ import java.util.Map;
  * @date 2019/4/25 0:13
  */
 public interface BusiStudentContactService {
-    Page<Map<String, Object>> list(Integer studentId);
+    Page<Map<String, Object>> list(Long studentId);
 
     boolean saveBatch(List<BusiStudentContact> studentContactList, int size);
+
+    void saveUpdateBatch(List<BusiStudentContact> contactList, Long studentId);
 }

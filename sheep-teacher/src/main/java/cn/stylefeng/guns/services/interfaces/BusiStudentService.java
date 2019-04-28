@@ -13,4 +13,8 @@ public interface BusiStudentService {
     Page<Map<String, Object>> list(BusiStudent student);
 
     boolean save(BusiStudent student);
+
+    void update(BusiStudent busiStudent);
+
+    BusiStudent getById(String studentId);
 }

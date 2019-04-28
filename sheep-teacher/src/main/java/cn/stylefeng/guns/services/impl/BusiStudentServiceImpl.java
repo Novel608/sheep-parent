@@ -23,6 +23,17 @@ public class BusiStudentServiceImpl extends ServiceImpl<BusiStudentMapper, BusiS
         return studentMapper.list(page,student);
     }
 
+    @Override
+    public void update(BusiStudent busiStudent) {
+        updateById(busiStudent);
+    }
+
+    @Override
+    public BusiStudent getById(String studentId) {
+        Long studentIdNum = Long.valueOf(studentId);
+        return studentMapper.selectById(studentIdNum);
+    }
+
     @Resource
     private BusiStudentMapper studentMapper;
 }

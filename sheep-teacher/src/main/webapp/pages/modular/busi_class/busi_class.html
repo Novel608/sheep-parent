@@ -31,10 +31,10 @@
 </div>
 
 <script type="text/html" id="tableBar">
-    @if(shiro.hasPermission("/teacher/edit")){
+    @if(shiro.hasPermission("/class/edit")){
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
     @}
-    @if(shiro.hasPermission("/teacher/deleteTeacher")){
+    @if(shiro.hasPermission("/class/delete")){
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
     @}
 </script>

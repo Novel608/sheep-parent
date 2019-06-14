@@ -91,6 +91,11 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload','table'], function () {
     // 添加联系人信息按钮
     $('#addContact').click(function(){
         var oldData =  table.cache[StudentContact.tableId];
+        if (oldData != null && oldData.length > 0) {
+            for (var temp in oldData){
+
+            }
+        }
         var tempData = {
             contactName: '',
             contactTypeName: '',
